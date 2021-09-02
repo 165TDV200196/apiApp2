@@ -20,16 +20,17 @@ exports.getall = (req, res) => {
 };
 exports.getType = (req, res) => {
   var page = req.query.page;
+  var id = req.query.id;
   var offsetSize = req.query.offsetSize;
   offsetSize = parseInt(offsetSize);
-
+  id = parseInt(id);
   page = parseInt(page);
   let soLuongBoQua = (page - 1) * offsetSize;
   if ((page, offsetSize)) {
-    Category.findAll({
-      include: [Product],
+    Product.findAll({
       offset: soLuongBoQua,
       limit: offsetSize,
+      where: { CategoryId: id },
     })
       .then((data) => {
         res.json({ data: data });
@@ -38,7 +39,7 @@ exports.getType = (req, res) => {
         throw er;
       });
   } else {
-    Category.findAll({ include: [Product] })
+    Product.findAll({ where: { CategoryId: id } })
       .then((data) => {
         res.json({ data: data });
       })
@@ -48,7 +49,7 @@ exports.getType = (req, res) => {
   }
 };
 exports.findone = (req, res) => {
-  Category.findOne({ where: { id: req.params.id } })
+  Category.findOne({ where: { id: req.params.id }, include: [Product] })
     .then((data) => {
       res.json({ data: data });
     })

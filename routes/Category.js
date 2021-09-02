@@ -4,7 +4,7 @@ module.exports = (app) => {
 
   router.post("/", Category.create);
   router.get("/", Category.getall);
-  router.get("/getType", Category.getType);
+
   router.get("/:id", Category.findone);
   router.delete("/:id", Category.delete);
   router.patch("/:id", Category.update);
