@@ -10,6 +10,7 @@ app.get("/", (req, res) => {
 });
 require("./routes/User")(app);
 require("./routes/Login")(app);
+require("./routes/Cart")(app);
 require("./routes/GetType")(app);
 require("./routes/Category")(app);
 require("./routes/Product")(app);
